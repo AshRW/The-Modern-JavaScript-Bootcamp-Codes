@@ -1,5 +1,5 @@
-let scorePrinter = function (score, totalScore=100) {
-    let percentage = (score/totalScore)*100;
+const scorePrinter = function (score, totalScore=100) {
+    const percentage = (score/totalScore)*100;
     if(percentage>=90){
         console.log(`You got an A (${percentage}%)`);
     } else if (percentage>=80 && percentage<90){
