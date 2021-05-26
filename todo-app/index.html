@@ -12,7 +12,17 @@
 </head>
 <body>
         <h1>Great Big H1 Tag here</h1>
-        <button id="add-todo-button">Add Todo</button>
+        <!-- <button id="add-todo-button">Add Todo</button> -->
+        <input type="text" id="input-todo" placeholder="Search todos here">
+        <label for="completed-status-checkbox">
+                <input type="checkbox" id="completed-status-checkbox"> Hide Completed todos
+        </label>
+        <div id="todo-div"></div>
+        <div id="remaining-todos"></div>
+        <form id="add-todo-form">
+                <input type="text" name="firstName">
+                <button>Submit</button>
+        </form>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
