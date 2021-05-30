@@ -35,7 +35,7 @@ const addNoteElement = function(objOfNote){
 
     let noteTitle = document.createElement('a');
     noteTitle.textContent=objOfNote.title;
-    noteTitle.setAttribute('href', '/edit-notes.html')
+    noteTitle.setAttribute('href', `/edit-notes.html#${objOfNote.id}`)
     noteElement.appendChild(noteTitle);
 
     document.querySelector('#notes-display-div').appendChild(noteElement);
