@@ -1,26 +1,24 @@
 // Save data to LocalStorage
-const saveNotesToLocalStorage = function(notesToSave){
+const saveNotesToLocalStorage = (notesToSave)=>{
     const data = JSON.stringify(notesToSave);
     localStorage.setItem('notesKey', data);
 }
 
 // Function to add create a new DOM element of given type and add it to the html
-const addElement = function (typeOfElement, elementText, elementLocation) {
+const addElement = (typeOfElement, elementText, elementLocation) =>{
     let newElement = document.createElement(typeOfElement);
     newElement.textContent = elementText;
     document.querySelector(elementLocation).appendChild(newElement);
 }
 
-const removeNote = function (noteId) {
-    const noteIndex = notes.findIndex(function(item){
-        return item.id === noteId;
-    })
+const removeNote = (noteId) => {
+    const noteIndex = notes.findIndex((item)=>item.id === noteId)
     if(noteIndex>-1){
         notes.splice(noteIndex, 1);
     }
 }
 
-const addNoteElement = function(objOfNote){
+const addNoteElement =(objOfNote)=>{
     let noteElement = document.createElement('div');
 
     let noteButton = document.createElement('button');
@@ -42,20 +40,17 @@ const addNoteElement = function(objOfNote){
 }
 
 // Renders filtered notes and calls the addElement function to render the notes to the html
-const renderNotes = function (array, filter){
-    const filteredNotes = array.filter(function (item) {
-        return item.title.toLowerCase().includes(filter.searchText.toLowerCase());
-    })
+const renderNotes = (array, filter)=>{
+    const filteredNotes = array.filter((item)=> item.title.toLowerCase().includes(filter.searchText.toLowerCase()))
     sortFilteredNotes(filteredNotes, filters.sortBy)
     document.querySelector("#notes-display-div").innerHTML='';
-    filteredNotes.forEach(function(item){
-        // addElement("p", item.title, "#notes-display-div");
+    filteredNotes.forEach((item)=>{
         addNoteElement(item);
     })
 }
 
 //Sort Notes accoring to the filter
-const sortFilteredNotes = function (notesToSort, sortBy) {
+const sortFilteredNotes = (notesToSort, sortBy)=> {
     if(sortBy==="edited"){
         criteria="updatedAt";
         notesToSort.sort(function(a,b) {
@@ -81,7 +76,7 @@ const sortFilteredNotes = function (notesToSort, sortBy) {
 
 
 // Get Notes from local storage else return empty array
-const getNotesFromLocalStorage = function () {
+const getNotesFromLocalStorage = ()=> {
     const notesJSON = localStorage.getItem('notesKey');
     if(notesJSON!=null){
         return JSON.parse(notesJSON);
@@ -91,6 +86,6 @@ const getNotesFromLocalStorage = function () {
 }
 
 //Update last updated timestamp by taking in the particular note
-const updateTimeStampToNow = function (note) {
+const updateTimeStampToNow = (note)=> {
     note.updatedAt = moment().valueOf();
 }
