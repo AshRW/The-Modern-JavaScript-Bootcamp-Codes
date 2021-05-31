@@ -46,6 +46,7 @@ const renderNotes = function (array, filter){
     const filteredNotes = array.filter(function (item) {
         return item.title.toLowerCase().includes(filter.searchText.toLowerCase());
     })
+    sortFilteredNotes(filteredNotes, filters.sortBy)
     document.querySelector("#notes-display-div").innerHTML='';
     filteredNotes.forEach(function(item){
         // addElement("p", item.title, "#notes-display-div");
@@ -53,6 +54,30 @@ const renderNotes = function (array, filter){
     })
 }
 
+//Sort Notes accoring to the filter
+const sortFilteredNotes = function (notesToSort, sortBy) {
+    if(sortBy==="edited"){
+        criteria="updatedAt";
+        notesToSort.sort(function(a,b) {
+            if(a[criteria]>b[criteria]) return -1;
+            else if (a[criteria]<b[criteria]) return 1;
+            else return 0;
+        })
+    } else if (sortBy==="created"){
+        criteria="createdAt";
+        notesToSort.sort(function(a,b) {
+            if(a[criteria]>b[criteria]) return 1;
+            else if (a[criteria]<b[criteria]) return -1;
+            else return 0;
+        })
+    } else {
+        notesToSort.sort(function (a,b) {
+            if(a.title.toLowerCase()<b.title.toLowerCase()) return -1;
+            else if (a.title.toLowerCase()>b.title.toLowerCase()) return 1;
+            else return 0 ;
+        });
+    }
+}
 
 
 // Get Notes from local storage else return empty array
@@ -63,4 +88,9 @@ const getNotesFromLocalStorage = function () {
     } else {
         return [];
     }
+}
+
+//Update last updated timestamp by taking in the particular note
+const updateTimeStampToNow = function (note) {
+    note.updatedAt = moment().valueOf();
 }

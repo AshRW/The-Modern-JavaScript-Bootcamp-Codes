@@ -1,7 +1,8 @@
 let notes = getNotesFromLocalStorage();
 
 const filters = {
-    searchText:''
+    searchText:'',
+    sortBy:'edited'
 }
 
 const renderNotesGeneralized = function (){
@@ -18,7 +19,9 @@ document.querySelector("#seach-input-field").addEventListener("input", function(
 
 //Drop down listner
 document.querySelector("#filter-by").addEventListener("change", function(e){
-    console.log(e.target.value);
+    // console.log(e.target.value);
+    filters.sortBy = e.target.value;
+    renderNotesGeneralized();
 })
 
 // Add new notes listner
@@ -28,10 +31,14 @@ document.querySelector("#add-new-note-form").addEventListener("submit", function
     if(newNoteValue.length === 0 ){
         newNoteValue = "UnNamed Note";
     }
+    const timestamp = moment().valueOf();
     let newNoteObj = {
         title:newNoteValue,
         body:"nothing yet",
-        id:uuidv4()
+        id:uuidv4(),
+        createdAt: timestamp,
+        updatedAt: timestamp
+        
     }
     notes.push(newNoteObj);
     saveNotesToLocalStorage(notes);
@@ -39,10 +46,6 @@ document.querySelector("#add-new-note-form").addEventListener("submit", function
     location.assign(`/edit-notes.html#${newNoteObj.id}`)
     e.target.elements.newNoteValue.value=''; //reset form field to nothing
 })
-
-// document.querySelector("#add-new-note-button").addEventListener('click', function(e){
-//     location.assign('/edit-notes.html');
-// })
 
 window.addEventListener('storage', function(e){
     if(e.key === 'notesKey'){
@@ -58,6 +61,6 @@ window.addEventListener('storage', function(e){
 // console.log(now2.getTime())
 // console.log(now1.getTime()<now2.getTime())
 
-const now = moment().set({'year':1998, 'month':8, 'date':2, 'hour': 15, 'minute':1, 'second':00});
-console.log(now.format('MMMM D, YYYY'));
-console.log(now.toString());
+// const now = moment().set({'year':1998, 'month':8, 'date':2, 'hour': 15, 'minute':1, 'second':00});
+// console.log(now.format('MMMM D, YYYY'));
+// console.log(now.fromNow());
