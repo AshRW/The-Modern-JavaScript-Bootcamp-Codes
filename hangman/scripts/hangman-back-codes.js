@@ -6,16 +6,20 @@ class Hang{
         this.status = 'playing';
     }
     getPuzzle() {
+        const returnDomElement = document.createElement('div');
+
         let puzzleString = '';
         this.word.forEach((item)=>{
             if(this.guessedLetters.includes(item) || item === ' '){
                 puzzleString += item;
+                returnDomElement.appendChild(this.createSpan(item))
             }else{
                 puzzleString += '*';
+                returnDomElement.appendChild(this.createSpan('*'))
             }
         })
         if(puzzleString.includes('*')){
-            return puzzleString;
+            return returnDomElement.innerHTML;
         } else {
             this.status = 'finished';
             return `You Won the Game!`
@@ -39,10 +43,15 @@ class Hang{
             return this.getPuzzle();
         }
     }
+    createSpan(textContent){
+        const newSpan = document.createElement('span');
+        newSpan.textContent=textContent;
+        return newSpan
+    }
 }
 
 const getPuzzle = async () => {
-    const response = await fetch('http://puzzle.mead.io/puzzle', {})
+    const response = await fetch('https://puzzle.mead.io/puzzle', {})
     if (response.status===200){
         const data = await response.json();
         return data;

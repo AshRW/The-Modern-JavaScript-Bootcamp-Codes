@@ -19,34 +19,51 @@ const removeNote = (noteId) => {
 }
 
 const addNoteElement =(objOfNote)=>{
-    let noteElement = document.createElement('div');
+    const noteElement = document.createElement('a');
 
-    let noteButton = document.createElement('button');
-    noteButton.textContent='X';
-    noteElement.appendChild(noteButton);
-    noteButton.addEventListener('click', function(){
-        // console.log(objOfNote);
-        removeNote(objOfNote.id);
-        saveNotesToLocalStorage(notes);
-        renderNotes(notes, filters);
-    })
+    // let noteButton = document.createElement('button');
+    // noteButton.textContent='X';
+    // noteElement.appendChild(noteButton);
+    // noteButton.addEventListener('click', function(){
+    //     // console.log(objOfNote);
+    //     removeNote(objOfNote.id);
+    //     saveNotesToLocalStorage(notes);
+    //     renderNotes(notes, filters);
+    // })
 
-    let noteTitle = document.createElement('a');
-    noteTitle.textContent=objOfNote.title;
-    noteTitle.setAttribute('href', `/edit-notes.html#${objOfNote.id}`)
-    noteElement.appendChild(noteTitle);
+    // lastUpdatedText.textContent = `Last Edited ${moment(editNote.updatedAt).fromNow()}`;
+
+    const noteTitleElement = document.createElement('p');
+    noteTitleElement.classList.add('list-item__title')
+    const statusElement = document.createElement('p');
+    statusElement.classList.add('list-item__subtitle')
+    statusElement.textContent = `Last Edited ${moment(objOfNote.updatedAt).fromNow()}`;
+    noteTitleElement.textContent=objOfNote.title;
+    noteElement.setAttribute('href', `/edit-notes.html#${objOfNote.id}`)
+    noteElement.classList.add('list-item')
+    noteElement.appendChild(noteTitleElement);
+    noteElement.appendChild(statusElement);
 
     document.querySelector('#notes-display-div').appendChild(noteElement);
 }
 
 // Renders filtered notes and calls the addElement function to render the notes to the html
 const renderNotes = (array, filter)=>{
+    const parentElement = document.querySelector("#notes-display-div");
     const filteredNotes = array.filter((item)=> item.title.toLowerCase().includes(filter.searchText.toLowerCase()))
     sortFilteredNotes(filteredNotes, filters.sortBy)
-    document.querySelector("#notes-display-div").innerHTML='';
-    filteredNotes.forEach((item)=>{
-        addNoteElement(item);
-    })
+    parentElement.innerHTML='';
+    if(filteredNotes.length>0){
+        filteredNotes.forEach((item)=>{
+            addNoteElement(item);
+        })
+    }else{
+        const emptyMsg = document.createElement('p');
+        emptyMsg.textContent="No Notes";
+        emptyMsg.classList.add('empty-message')
+        parentElement.appendChild(emptyMsg);
+    }
+    
 }
 
 //Sort Notes accoring to the filter

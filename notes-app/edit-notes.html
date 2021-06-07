@@ -6,19 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <title>Edit Notes</title>
   </head>
   <body>
-      <input id='note-title' placeholder="Note Title">
-      <textarea id="note-body" placeholder="Note Body"></textarea>
-      <button id="remove-note-button">Remove Note</button>
-      <div id="last-updated"></div>
+    <div class="header">
+      <div class="container">
+        <h1 class="header__title">The Notes Application</h1>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="actions__container actions__container--spaced">
+        <a href="/index.html">Home</a>
+        <div id="last-updated"></div>
+      </div>
+    </div>
+    <div class="container">
+      <input class="title-input" id='note-title' placeholder="Note Title">
+        <textarea class="body-input" id="note-body" placeholder="Note Body"></textarea>
+        <button class="button button--secondary" id="remove-note-button">Remove Note</button>
+    </div>
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"></script>
-    <script src="/notes-app-functions.js"></script>
-    <script src="/notes-edit.js"></script>
+    <script src="/scripts/notes-app-functions.js"></script>
+    <script src="/scripts/notes-edit.js"></script>
   </body>
 </html>

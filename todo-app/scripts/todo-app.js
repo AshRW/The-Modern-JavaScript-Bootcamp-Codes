@@ -21,16 +21,21 @@ document.querySelector("#input-todo").addEventListener('input', function(e){
 document.querySelector("#add-todo-form").addEventListener("submit", function(e){
     e.preventDefault();
     let firstName = e.target.elements.firstName.value;
-    console.log(firstName);
-    todos.push({
-        title:firstName,
-        completed:false,
-        id:uuidv4()
-    })
-    localStorage.clear();
-    saveTodosToLocalStorage(todos);
-    renderTodosGeneralized();
-    e.target.elements.firstName.value='';
+    if(firstName.length!=0){
+        firstName = firstName.trim();
+        console.log(firstName);
+        todos.push({
+            title:firstName,
+            completed:false,
+            id:uuidv4()
+        })
+        localStorage.clear();
+        saveTodosToLocalStorage(todos);
+        renderTodosGeneralized();
+        e.target.elements.firstName.value='';
+    } else {
+        console.log("please provide a name for the task");
+    }
 })
 
 //checkbox event listener

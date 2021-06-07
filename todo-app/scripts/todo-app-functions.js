@@ -29,11 +29,12 @@ const todoCompleted = function(todoId){
 }
 
 const addTodoElement = function(objOfTodo){
-    const todoElement = document.createElement('div');
+    const todoElement = document.createElement('label');
+    const containerElement = document.createElement('div')
     
     const todoCheckbox = document.createElement('input');
     todoCheckbox.setAttribute('type', 'checkbox');
-    todoElement.appendChild(todoCheckbox);
+    containerElement.appendChild(todoCheckbox);
     todoCheckbox.checked = objOfTodo.completed;
     todoCheckbox.addEventListener('change', function(e){
         // console.log(e.target.checked);
@@ -44,10 +45,15 @@ const addTodoElement = function(objOfTodo){
 
     const todoTitle = document.createElement('span');
     todoTitle.textContent=objOfTodo.title;
-    todoElement.appendChild(todoTitle);
+    containerElement.appendChild(todoTitle);
+
+    todoElement.classList.add('list-item');
+    containerElement.classList.add('list-item__container')
+    todoElement.appendChild(containerElement);
 
     const todoButton = document.createElement('button');
-    todoButton.textContent='X';
+    todoButton.textContent='Remove';
+    todoButton.classList.add('button', 'button--text');
     todoElement.appendChild(todoButton);
     todoButton.addEventListener('click', function(){
         // console.log(objOfTodo);
@@ -55,6 +61,7 @@ const addTodoElement = function(objOfTodo){
         saveTodosToLocalStorage(todos);
         renderTodos(todos,filters);
     })
+    
 
     document.querySelector("#todo-div").appendChild(todoElement);
 }
@@ -77,17 +84,30 @@ const renderTodos = function (arr, filters){
     }
     })
     // debugger
-    const numberOfTodosLeftMessage = document.createElement("p");
+    const numberOfTodosLeftMessage = document.createElement("h3");
+    numberOfTodosLeftMessage.classList.add('list-title');
     numberOfTodosLeftMessage.textContent=`You have ${noOfUnfinished} Unfinished Todos`;
+    if(noOfUnfinished===1){
+        numberOfTodosLeftMessage.textContent=`You have ${noOfUnfinished} Unfinished Todo`;
+    } else if (noOfUnfinished === 0){
+        numberOfTodosLeftMessage.textContent=`All caught up!`;
+    }
     document.querySelector("#remaining-todos").innerHTML='';
     document.querySelector("#remaining-todos").appendChild(numberOfTodosLeftMessage);
     // Incomplete todos message ends
     document.querySelector("#todo-div").innerHTML='';
-    filteredTodos.forEach(function(item){
-        // addElement("p",  item.title, "#todo-div");
-        addTodoElement(item);
-
-    })
+    if(filteredTodos.length>0){
+        filteredTodos.forEach(function(item){
+            // addElement("p",  item.title, "#todo-div");
+            addTodoElement(item);
+    
+        })
+    } else {
+        const emptyTodoMsg = document.createElement('p');
+        emptyTodoMsg.textContent = 'No Todos to show';
+        emptyTodoMsg.classList.add('empty-message');
+        document.querySelector("#todo-div").appendChild(emptyTodoMsg);
+    }
 }
 
 const fetchFromLocalStorage = function () {
