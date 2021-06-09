@@ -1,8 +1,25 @@
+// Get Notes from local storage else return empty array
+const getNotesFromLocalStorage = ()=> {
+    const notesJSON = localStorage.getItem('notesKey');
+    if(notesJSON!=null){
+        return JSON.parse(notesJSON);
+    } else {
+        return [];
+    }
+}
 // Save data to LocalStorage
-const saveNotesToLocalStorage = (notesToSave)=>{
-    const data = JSON.stringify(notesToSave);
+const saveNotesToLocalStorage = (notes)=>{
+    const data = JSON.stringify(notes);
     localStorage.setItem('notesKey', data);
 }
+const removeNote = (noteId) => {
+    const noteIndex = notes.findIndex((item)=>item.id === noteId)
+    if(noteIndex>-1){
+        notes.splice(noteIndex, 1);
+        saveNotesToLocalStorage();
+    }
+}
+//------------------------------------------------------------------------------------------------------------------
 
 // Function to add create a new DOM element of given type and add it to the html
 const addElement = (typeOfElement, elementText, elementLocation) =>{
@@ -11,28 +28,10 @@ const addElement = (typeOfElement, elementText, elementLocation) =>{
     document.querySelector(elementLocation).appendChild(newElement);
 }
 
-const removeNote = (noteId) => {
-    const noteIndex = notes.findIndex((item)=>item.id === noteId)
-    if(noteIndex>-1){
-        notes.splice(noteIndex, 1);
-    }
-}
+
 
 const addNoteElement =(objOfNote)=>{
     const noteElement = document.createElement('a');
-
-    // let noteButton = document.createElement('button');
-    // noteButton.textContent='X';
-    // noteElement.appendChild(noteButton);
-    // noteButton.addEventListener('click', function(){
-    //     // console.log(objOfNote);
-    //     removeNote(objOfNote.id);
-    //     saveNotesToLocalStorage(notes);
-    //     renderNotes(notes, filters);
-    // })
-
-    // lastUpdatedText.textContent = `Last Edited ${moment(editNote.updatedAt).fromNow()}`;
-
     const noteTitleElement = document.createElement('p');
     noteTitleElement.classList.add('list-item__title')
     const statusElement = document.createElement('p');
@@ -92,15 +91,7 @@ const sortFilteredNotes = (notesToSort, sortBy)=> {
 }
 
 
-// Get Notes from local storage else return empty array
-const getNotesFromLocalStorage = ()=> {
-    const notesJSON = localStorage.getItem('notesKey');
-    if(notesJSON!=null){
-        return JSON.parse(notesJSON);
-    } else {
-        return [];
-    }
-}
+
 
 //Update last updated timestamp by taking in the particular note
 const updateTimeStampToNow = (note)=> {
