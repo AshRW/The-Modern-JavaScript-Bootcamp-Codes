@@ -27,7 +27,8 @@ class Hang{
     }
     guessChar(guess) {
         if(!this.guessedLetters.includes(guess)){
-            this.guessedLetters.push(guess);
+            // this.guessedLetters.push(guess);
+            this.guessedLetters=[...this.guessedLetters, guess];
             if(this.word.includes(guess)){    
                 return this.getPuzzle();
             } else {

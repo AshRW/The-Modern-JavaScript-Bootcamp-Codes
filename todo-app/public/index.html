@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="A JS todo Application"/>
+<link rel="stylesheet" href="./styles/styles.css">
+<link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"> -->
+<title>ToDo APP</title>
+</head>
+<body>
+        <div class="header">
+                <div class="container">
+                        <h1 class="header__title">ToDo App</h1>
+                        <h3 class="header__subtitle">Get Things Done!</h3>
+                </div>
+        </div>
+
+        <div class="actions">
+                <div class="actions__container">
+                        <input class="input"  type="text" id="input-todo" placeholder="Search todos here">
+                        <label class="checkbox" for="completed-status-checkbox">
+                                <input type="checkbox" id="completed-status-checkbox"> Hide Completed todos
+                        </label>
+                </div>
+        </div>
+        <div class="container">
+                <div id="todo-div"></div>
+                <div id="remaining-todos"></div>
+                <form id="add-todo-form">
+                        <input class="input" type="text" name="firstName">
+                        <button class="button">Submit</button>
+                </form>
+        </div>
+
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script> -->
+<script src="./scripts/main.js"></script>
+</body>
+</html>
